@@ -18,6 +18,7 @@ const meta = {
       },
     },
   },
+  args: { open: false, onClose: () => {}, title: '' },
 } satisfies Meta<typeof Modal>;
 
 export default meta;

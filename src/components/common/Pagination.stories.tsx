@@ -6,6 +6,7 @@ const meta = {
   title: 'Components/Pagination',
   component: Pagination,
   tags: ['autodocs'],
+  args: { page: 1, pageSize: 10, total: 0, onPageChange: () => {} },
 } satisfies Meta<typeof Pagination>;
 
 export default meta;

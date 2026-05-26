@@ -14,6 +14,7 @@ const meta = {
       },
     },
   },
+  args: { items: [], value: '', onChange: () => {} },
 } satisfies Meta<typeof Tabs>;
 
 export default meta;

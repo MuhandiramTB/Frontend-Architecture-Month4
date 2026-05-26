@@ -37,6 +37,7 @@ const meta = {
   component: Table,
   tags: ['autodocs'],
   parameters: { layout: 'fullscreen' },
+  args: { columns: [], rows: [], getRowId: (r: unknown) => String((r as { id: string }).id) },
 } satisfies Meta<typeof Table>;
 
 export default meta;
