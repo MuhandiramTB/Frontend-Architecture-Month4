@@ -13,8 +13,8 @@ const NETWORK_DELAY = 250;
 
 const DEMO_PASSWORD = 'admin1234';
 const DEMO_USERS: Array<AuthUser & { password: string }> = [
-  { id: 'auth_admin', name: 'Ada Lovelace',   email: 'admin@adminflow.io',  role: 'admin',  avatarColor: '#2563eb', password: DEMO_PASSWORD },
-  { id: 'auth_edit',  name: 'Edgar Editor',   email: 'editor@adminflow.io', role: 'editor', avatarColor: '#7c3aed', password: DEMO_PASSWORD },
+  { id: 'auth_thilan',  name: 'Thilan Buddhika',  email: 'thilan@bistecglobal.com',  role: 'admin',  avatarColor: '#2563eb', password: DEMO_PASSWORD },
+  { id: 'auth_subhash', name: 'Subhash Perera',   email: 'subhash@bistecglobal.com', role: 'editor', avatarColor: '#7c3aed', password: DEMO_PASSWORD },
 ];
 
 function paginate<T>(items: T[], page: number, pageSize: number): PaginatedResult<T> {

@@ -2,49 +2,109 @@ import type {
   ActivityItem,
   Metric,
   NotificationItem,
-  Role,
   TrendPoint,
   User,
 } from '@/types';
 
-const FIRST = [
-  'Ava', 'Noah', 'Mia', 'Liam', 'Zoe', 'Eli', 'Maya', 'Owen', 'Lily', 'Jude',
-  'Iris', 'Ezra', 'Nora', 'Kai', 'Sage', 'Theo', 'Cleo', 'Finn', 'Wren', 'Hugo',
-  'Ada', 'Beau', 'Cora', 'Dax', 'Esme', 'Felix', 'Gigi', 'Hank', 'Ivy', 'Jett',
+// Fixed team roster — replaces the generated foreign-name dataset.
+export const SEED_USERS: User[] = [
+  {
+    id: 'usr_thilan',
+    name: 'Thilan Buddhika',
+    email: 'thilan@bistecglobal.com',
+    role: 'admin',
+    isActive: true,
+    createdAt: '2025-01-15T08:30:00Z',
+    lastLogin: '2026-05-26T09:12:00Z',
+  },
+  {
+    id: 'usr_subhash',
+    name: 'Subhash Perera',
+    email: 'subhash@bistecglobal.com',
+    role: 'admin',
+    isActive: true,
+    createdAt: '2025-02-03T10:15:00Z',
+    lastLogin: '2026-05-26T08:42:00Z',
+  },
+  {
+    id: 'usr_chandima',
+    name: 'Chandima Silva',
+    email: 'chandima@bistecglobal.com',
+    role: 'editor',
+    isActive: true,
+    createdAt: '2025-02-22T13:05:00Z',
+    lastLogin: '2026-05-25T17:48:00Z',
+  },
+  {
+    id: 'usr_jayath',
+    name: 'Jayath Fernando',
+    email: 'jayath@bistecglobal.com',
+    role: 'editor',
+    isActive: true,
+    createdAt: '2025-03-11T09:00:00Z',
+    lastLogin: '2026-05-26T07:21:00Z',
+  },
+  {
+    id: 'usr_buddhika',
+    name: 'Buddhika Wickramasinghe',
+    email: 'buddhika@bistecglobal.com',
+    role: 'editor',
+    isActive: true,
+    createdAt: '2025-03-27T11:42:00Z',
+    lastLogin: '2026-05-24T19:10:00Z',
+  },
+  {
+    id: 'usr_gayashan',
+    name: 'Gayashan Jayasinghe',
+    email: 'gayashan@bistecglobal.com',
+    role: 'user',
+    isActive: true,
+    createdAt: '2025-04-14T14:25:00Z',
+    lastLogin: '2026-05-26T06:55:00Z',
+  },
+  {
+    id: 'usr_eranga',
+    name: 'Eranga Rathnayake',
+    email: 'eranga@bistecglobal.com',
+    role: 'user',
+    isActive: true,
+    createdAt: '2025-05-02T08:00:00Z',
+    lastLogin: '2026-05-25T22:33:00Z',
+  },
+  {
+    id: 'usr_aathma',
+    name: 'Aathma Bandara',
+    email: 'aathma@bistecglobal.com',
+    role: 'user',
+    isActive: true,
+    createdAt: '2025-06-19T12:18:00Z',
+    lastLogin: '2026-05-26T08:05:00Z',
+  },
+  {
+    id: 'usr_ranali',
+    name: 'Ranali Senanayake',
+    email: 'ranali@bistecglobal.com',
+    role: 'user',
+    isActive: false,
+    createdAt: '2025-07-08T15:50:00Z',
+    lastLogin: '2026-04-12T11:20:00Z',
+  },
+  {
+    id: 'usr_faarah',
+    name: 'Faarah Gunawardena',
+    email: 'faarah@bistecglobal.com',
+    role: 'user',
+    isActive: true,
+    createdAt: '2025-08-21T09:35:00Z',
+    lastLogin: null,
+  },
 ];
-const LAST = [
-  'Patel', 'Nguyen', 'Garcia', 'Kim', 'Smith', 'Johnson', 'Lee', 'Brown',
-  'Davis', 'Wilson', 'Moore', 'Taylor', 'Anderson', 'Thomas', 'Jackson',
-  'White', 'Harris', 'Martin', 'Thompson', 'Lopez',
-];
-
-const ROLES: Role[] = ['admin', 'editor', 'user'];
 
 function deterministicSeed(i: number) {
-  // Simple, stable pseudorandom; avoids snapshot churn across reloads.
+  // Stable pseudorandom — keeps charts identical across reloads.
   const x = Math.sin(i * 9301 + 49297) * 233280;
   return x - Math.floor(x);
 }
-
-export const SEED_USERS: User[] = Array.from({ length: 87 }, (_, i) => {
-  const first = FIRST[i % FIRST.length];
-  const last = LAST[Math.floor(deterministicSeed(i) * LAST.length)];
-  const role = ROLES[Math.floor(deterministicSeed(i + 7) * ROLES.length)];
-  const createdAt = new Date(2025, 0, 1 + Math.floor(deterministicSeed(i + 3) * 480))
-    .toISOString();
-  const lastLogin = deterministicSeed(i + 5) > 0.15
-    ? new Date(2026, 4, 1 + Math.floor(deterministicSeed(i + 9) * 25)).toISOString()
-    : null;
-  return {
-    id: `usr_${(1000 + i).toString(36)}`,
-    name: `${first} ${last}`,
-    email: `${first}.${last}`.toLowerCase() + `@adminflow.io`,
-    role,
-    isActive: deterministicSeed(i + 11) > 0.18,
-    createdAt,
-    lastLogin,
-  };
-});
 
 export const SEED_METRICS: Metric[] = [
   { id: 'm_users',   label: 'Active users',   value: 18420, delta: 12.4,  format: 'number'   },
@@ -64,16 +124,16 @@ export const SEED_TREND: TrendPoint[] = Array.from({ length: 30 }, (_, i) => {
 });
 
 export const SEED_ACTIVITY: ActivityItem[] = [
-  { id: 'a1', actor: 'Ava Patel',    action: 'invited',        target: 'noah@adminflow.io',    timestamp: '2026-05-26T09:12:00Z' },
-  { id: 'a2', actor: 'System',       action: 'rotated key for',target: 'production API',       timestamp: '2026-05-26T08:51:00Z' },
-  { id: 'a3', actor: 'Liam Nguyen',  action: 'updated role of',target: 'mia@adminflow.io',     timestamp: '2026-05-26T07:44:00Z' },
-  { id: 'a4', actor: 'Zoe Garcia',   action: 'deleted',        target: 'broken-webhook',       timestamp: '2026-05-25T22:09:00Z' },
-  { id: 'a5', actor: 'Eli Kim',      action: 'enabled SSO for',target: 'Workspace West',       timestamp: '2026-05-25T18:30:00Z' },
-  { id: 'a6', actor: 'Maya Smith',   action: 'restored',       target: 'usr_1f7',              timestamp: '2026-05-25T14:02:00Z' },
+  { id: 'a1', actor: 'Thilan Buddhika',    action: 'invited',         target: 'faarah@bistecglobal.com',  timestamp: '2026-05-26T09:12:00Z' },
+  { id: 'a2', actor: 'System',             action: 'rotated key for', target: 'production API',           timestamp: '2026-05-26T08:51:00Z' },
+  { id: 'a3', actor: 'Subhash Perera',     action: 'updated role of', target: 'chandima@bistecglobal.com', timestamp: '2026-05-26T07:44:00Z' },
+  { id: 'a4', actor: 'Chandima Silva',     action: 'deleted',         target: 'broken-webhook',           timestamp: '2026-05-25T22:09:00Z' },
+  { id: 'a5', actor: 'Buddhika Wickramasinghe', action: 'enabled SSO for', target: 'Workspace Colombo', timestamp: '2026-05-25T18:30:00Z' },
+  { id: 'a6', actor: 'Eranga Rathnayake',  action: 'restored',        target: 'usr_ranali',               timestamp: '2026-05-25T14:02:00Z' },
 ];
 
 export const SEED_NOTIFICATIONS: NotificationItem[] = [
-  { id: 'n1', title: 'Welcome to AdminFlow',    body: 'Your trial is active for 14 more days.',         level: 'info',    read: false, createdAt: '2026-05-26T08:00:00Z' },
-  { id: 'n2', title: 'New sign-ups spike',      body: '+12% over the last 24h — nice work.',          level: 'success', read: false, createdAt: '2026-05-26T07:30:00Z' },
-  { id: 'n3', title: 'Webhook delivery failing', body: 'orders.created → https://hooks.example/x',     level: 'warning', read: true,  createdAt: '2026-05-25T22:18:00Z' },
+  { id: 'n1', title: 'Welcome to AdminFlow',    body: 'Your trial is active for 14 more days.',     level: 'info',    read: false, createdAt: '2026-05-26T08:00:00Z' },
+  { id: 'n2', title: 'New sign-ups spike',      body: '+12% over the last 24h — nice work.',        level: 'success', read: false, createdAt: '2026-05-26T07:30:00Z' },
+  { id: 'n3', title: 'Webhook delivery failing', body: 'orders.created → https://hooks.example/x', level: 'warning', read: true,  createdAt: '2026-05-25T22:18:00Z' },
 ];

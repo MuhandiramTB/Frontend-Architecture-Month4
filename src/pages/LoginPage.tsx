@@ -44,7 +44,7 @@ export default function LoginPage() {
   }
 
   function fillDemo() {
-    setValue('email', 'admin@adminflow.io');
+    setValue('email', 'thilan@bistecglobal.com');
     setValue('password', 'admin1234');
     clearError();
   }
@@ -100,7 +100,7 @@ export default function LoginPage() {
 
           <div className="rounded-md bg-slate-50 p-3 text-xs text-slate-600 dark:bg-slate-800/60 dark:text-slate-300">
             <p className="mb-2 font-semibold">Demo credentials</p>
-            <p>Email: <code>admin@adminflow.io</code></p>
+            <p>Email: <code>thilan@bistecglobal.com</code></p>
             <p>Password: <code>admin1234</code></p>
             <button
               type="button"
